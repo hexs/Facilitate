@@ -1,0 +1,21 @@
+{
+  "label": {
+    "colours": {
+      "normal_text": "#000000",
+      "disabled_text": "",
+      "text_shadow": "#ffffff"
+    },
+    "font": {
+      "name": "montserrat",
+      "size": "12",
+      "bold": "0",
+      "italic": "0"
+    },
+    "misc": {
+      "text_horiz_alignment": "left",
+      "text_shadow": "1",
+      "text_shadow_size": "1",
+      "text_shadow_offset": "0,0"
+    }
+  }
+}
