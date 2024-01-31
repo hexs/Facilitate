@@ -1,57 +1,34 @@
-import json
-import time
-
+import pygetwindow as gw
 import pystray
 from pystray import MenuItem as item
 from PIL import Image, ImageDraw
-from func import req_dict
-
-
-class Icon(pystray.Icon):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def update_menu(self):
-        super().update_menu()
-        print('update_menu')
-        if self.visible:
-            with open('data_program.json') as f:
-                data = json.loads(f.read())
-            data['show_ui'] = not data['show_ui']
-            with open('data_program.json', 'w') as f:
-                f.write(json.dumps(data))
-
-
-def create_image():
-    width, height, color1, color2 = 64, 64, 'black', 'white'
-    image = Image.new('RGB', (width, height), color1)
-    dc = ImageDraw.Draw(image)
-    dc.rectangle(
-        (width // 2, 0, width, height // 2),
-        fill=color2)
-    dc.rectangle(
-        (0, height // 2, width // 2, height),
-        fill=color2)
-    return image
-
+import configparser
+from graph import show_all_res
 
 def on_exit(icon, item):
-    req_dict('write?close program=True')
+    conf = configparser.ConfigParser()
+    conf.read('config.ini')
+    conf['DEFAULT']['stop program'] = '1'
+    with open('config.ini', 'w') as configfile:
+        conf.write(configfile)
+
     icon.stop()
 
 
-def f_visible(icon, item):
-   pass
+def graph(icon, item):
+    pass
+    show_all_res()
+
 
 
 def main():
     menu = (
-        item('p1', f_visible),
+        item('show graph', graph),
         item('Exit', on_exit),
     )
 
-    image = create_image()
-    icon = Icon("name", image, menu=menu, title='-')
+    image = Image.open('icon.png')
+    icon = pystray.Icon("name", image, menu=menu, title='Count Time')
     icon.run()
 
 
