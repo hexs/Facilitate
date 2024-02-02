@@ -51,7 +51,7 @@ except:
     y = eval(conf['DEFAULT']['WINDOW_POS_Y'])
 
 WHITE = (255, 255, 255)
-GREEN = (0, 150, 10)
+GREEN = (0, 0, 0)
 RED = (128, 0, 10)
 BLACK = 0, 0, 0
 
@@ -72,8 +72,8 @@ style = ctypes.windll.user32.GetWindowLongW(hwnd, GWL_EXSTYLE)
 ctypes.windll.user32.SetWindowLongW(hwnd, GWL_EXSTYLE, style | WS_EX_TOOLWINDOW)
 # use Always On Top
 win32gui.SetWindowPos(hwnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, win32con.SWP_NOMOVE | win32con.SWP_NOSIZE)
-font = pygame.font.Font('Roboto-Medium.ttf', 16)
-all_time_font = pygame.font.Font('Roboto-Medium.ttf', 18)
+font = pygame.font.Font('Roboto-Regular.ttf', 14)
+all_time_font = pygame.font.Font('Roboto-Regular.ttf', 16)
 
 # --- run ---
 try:
@@ -175,13 +175,13 @@ while conf['DEFAULT']['stop program'] == '0':
 
     # ui
     display.fill(WHITE)
-    pygame.draw.rect(display, (150,) * 3, pygame.Rect(0, 0, width, height), 1)
-    text1 = font.render(f'Window active: {ac_t_sec:.0f}', True, GREEN if window_active_ok else RED)
+    # pygame.draw.rect(display, (150,) * 3, pygame.Rect(0, 0, width, height), 1)
+    text1 = font.render(f'NX 11: {ac_t_sec:.0f}', True, GREEN if window_active_ok else RED)
     textRect1 = text1.get_rect()
     textRect1.topleft = (4, 2)
-    text2 = font.render(f'Mouse moved: {mo_t_sec:.0f}', True, GREEN if move_mouse_ok else RED)
+    text2 = font.render(f'Move : {mo_t_sec:.0f}', True, GREEN if move_mouse_ok else RED)
     textRect2 = text2.get_rect()
-    textRect2.topleft = (4, 23)
+    textRect2.bottomleft = (4, height-2)
     text3 = all_time_font.render(f'{ac_today_time / 60:.1f} min', True, BLACK)
     textRect3 = text3.get_rect()
     textRect3.right = width - 4
