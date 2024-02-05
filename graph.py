@@ -84,19 +84,19 @@ def show_all_res():
         img = img[:, 28800:72000]
         v['show'] = cv2.resize(img, (0, 0), fx=0.03, fy=10, interpolation=cv2.INTER_NEAREST)
     img_dict['total'] = {
-        'show': np.full((100, 1500, 3), (200, 200, 200), dtype=np.uint8),
+        'show': np.full((80, 1500, 3), (200, 200, 200), dtype=np.uint8),
         'second': second
     }
     print(img_dict)
     mix_image = None
     for k, v in img_dict.items():
-        image_pil = Image.new('RGB', (1500, 100), (200, 200, 200))
+        image_pil = Image.new('RGB', (1500, 80), (200, 200, 200))
         draw = ImageDraw.Draw(image_pil)
         for i in range(8, 21):
             font = ImageFont.truetype('Roboto-Regular.ttf', 12)
-            draw.text((177 + 107 * (i - 8), 55), f'{i}', font=font, fill=(0, 0, 0))
+            draw.text((170 + 107 * (i - 8), 45), f'{i}', font=font, fill=(0, 0, 0))
 
-        font = ImageFont.truetype('Roboto-Regular.ttf', 25)
+        font = ImageFont.truetype('Roboto-Regular.ttf', 20)
         draw.text((30, 15), f'{k}', font=font, fill=(0, 0, 0))
         draw.text((30, 45), f"{round(v['second'] / 60, 1)} min", font=font, fill=(0, 0, 0))
 
